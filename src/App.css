@@ -1,39 +1,69 @@
-.App {
-  text-align: center;
+.btn_add-budget {
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 10px;
+    width: 250px;
+    height: 40px;
+    transition: 0.5s all;
+    font-size: 20px;
+    margin-top: '10px';
+    font-family: 'Montserrat';
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn_add-budget:hover {
+    transform: scale(1.1);
+    color: black;
+    background-color: rgb(238, 138, 138);
+    font-family: 'Montserrat';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+.bg_add-budget {
+    background: url('/src/assets/bd_addBudget2.webp');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.bg_increase-budget {
+    background: url('/src/assets/bd_increaseBudget.webp');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -8px 12px 15px -2px rgba(0, 0, 0, 0.75);
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.input {
+    color: 'white'
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.influence {
+    background-color: green;
+}
+
+.expenditure {
+    background-color: red;
+}
+
+.btn-register {
+    width: 250px;
+    height: 40px;
+    border: none;
+    border-radius: 15px;
+    margin-top: 30px;
+    background-color: rgb(108, 45, 167);
+    font-size: 20px;
+    font-family: 'Montserrat';
+    color: white;
+    cursor: pointer;
+    transition: 1s all;
+}
+
+.btn-register:hover {
+    transform: scale(1.2)
 }
