@@ -152,10 +152,10 @@ const SignUp =  () => {
             : <TextField  value={name} onChange={(e)=>setName(e.target.value)} variant="outlined" label="Name" color="warning" sx={{width:'300px', marginBottom:'10px'}}></TextField>}
             {errors.login.length > 0 ? <TextField  error helperText={errors.login} value={login} onChange={(e)=>setLogin(e.target.value)} variant="outlined" label="Login" color="warning" sx={{width:'300px', marginBottom:'10px'}}></TextField> 
             : <TextField  value={login} onChange={(e)=>setLogin(e.target.value)} variant="outlined" label="Login" color="warning" sx={{width:'300px', marginBottom:'10px'}}></TextField>}
-            {errors.password ? <TextField error helperText={errors.password} value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
-            : <TextField value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning" label="Hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
-             {errors.checkPass ? <TextField error helperText={errors.checkPass} value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
-            : <TextField value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning" label="Potwierdź hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
+            {errors.password ? <TextField type="password" error helperText={errors.password} value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
+            : <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning" label="Hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
+             {errors.checkPass ? <TextField type="password" error helperText={errors.checkPass} value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
+            : <TextField type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning" label="Potwierdź hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
              
              {response  ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Ten mail jest już używany!</Typography></Alert> : null }
             <Button color="warning" variant="contained" disableElevation sx={{width: '250px', marginTop:'20px'}} onClick={RegisterUser}>Zarejestruj się</Button>
