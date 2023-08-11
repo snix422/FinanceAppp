@@ -7,15 +7,6 @@ import axios from "axios";
 
 const ChartSummary = (props:any) => {
 
-/*const expenditure = Items.filter((item:any)=>item.type === "expenditure");
-const zakupy = useSelector((state:any)=>state.influenceAndExpenditure.categoryZakupy);
-const paliwo = useSelector((state:any)=>state.influenceAndExpenditure.categoryPaliwo);
-const leki = useSelector((state:any)=>state.influenceAndExpenditure.categoryLeki);
-const podroze = useSelector((state:any)=>state.influenceAndExpenditure.categoryPodroze);
-const dzieci = useSelector((state:any)=>state.influenceAndExpenditure.categoryDzieci);
-const rachunki = useSelector((state:any)=>state.influenceAndExpenditure.categoryRachunki);
-const kredyt = useSelector((state:any)=>state.influenceAndExpenditure.categoryKredyt);*/
-
 ChartJS.register(...registerables);
 const date = new Date();
 const months = ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"];
