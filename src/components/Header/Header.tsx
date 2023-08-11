@@ -2,9 +2,8 @@ import  { Typography, AppBar, Stack, IconButton, Paper, InputBase, Dialog, Menu,
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
-import { useState, FunctionComponent } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
 
 interface PropsHeader {
   changeAuth(text:string|null):void
@@ -15,12 +14,7 @@ const Header:FunctionComponent<PropsHeader> = ({changeAuth}) => {
     const [displaySearch, setDisplaySearch] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [open, setOpen] = useState(false);
-    //const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-   // const [auth,setAuth] = useState(false)
-
-    const navigate = useNavigate();
-
-
+  
     const handleClose = () => {
         setOpen(!open);
     }
@@ -28,23 +22,12 @@ const Header:FunctionComponent<PropsHeader> = ({changeAuth}) => {
     const handleClick = (event:any) => {
         setOpen(!open);
         setAnchorEl(event.currentTarget);
-       
       };
-
-      const moveToSignIn = () => {
-        navigate('/signin')
-      }
-
-      const moveToSignUp = () => {
-        navigate('/signup')
-      }
 
       const signOut = () => {
         localStorage.removeItem('currentuser');
         localStorage.removeItem('iduser');
         changeAuth(localStorage.getItem('currentuser'));
-        navigate('/')
-  
       }
  
     return(
@@ -69,7 +52,7 @@ const Header:FunctionComponent<PropsHeader> = ({changeAuth}) => {
             open={open}
             onClose={handleClose} >
               
-        <MenuItem onClick={signOut}>Wyloguj się</MenuItem>
+        <Link to="/" style={{textDecoration:'none', color:'black'}}><MenuItem onClick={signOut}>Wyloguj się</MenuItem></Link>
         <MenuItem onClick={handleClose}>Zamknij</MenuItem>
         
       </Menu></Box> : <Menu
@@ -77,8 +60,8 @@ const Header:FunctionComponent<PropsHeader> = ({changeAuth}) => {
             id="basic-menu"
             open={open}
             onClose={handleClose} >
-        <MenuItem onClick={moveToSignIn}>Zaloguj się</MenuItem>
-        <MenuItem onClick={moveToSignUp}>Załóż konto</MenuItem>
+        <Link to="/signin" style={{textDecoration:'none',color:'black'}}><MenuItem >Zaloguj się</MenuItem></Link>
+        <Link to="/signup" style={{textDecoration:'none', color:'black'}}><MenuItem >Załóż konto</MenuItem></Link>
         <MenuItem onClick={handleClose}>Zamknij</MenuItem>
         
       </Menu>}

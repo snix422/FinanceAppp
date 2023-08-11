@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import Header from './components/Header/Header';
 import AddBudget from './components/Actions/AddBudget';
-import IncreaseBudget from './components/Actions/IncreaseBudget';
+import IncreaseBudget from './components/Actions/DecreaseBudget';
 import History from './components/History';
 import CurrentMonthStatistic from './components/CurrentMonthStatistic';
 import Layout from './components/Layout';

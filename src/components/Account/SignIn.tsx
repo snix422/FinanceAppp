@@ -18,43 +18,41 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
-    const checkValidate = () => {
-        if(response == "INVALID_PASSWORD"){
-            setErrorLogin('Nieprawidłowe hasło');
-        }else if(response == "INVALID_EMAIL"){
-            setErrorLogin('Nieprawidłowy e-mail');
+    const validatorUser = () => {
+        if(login.length === 0){
+          setErrors(previousState=>{return{...previousState, login:'Login jest wymagany'}})
+          return 'Login jest wymagany'
+        }else if(login.length < 4){
+          setErrors(previousState=>{return{...previousState,login: 'Login musi posiadać min. 4 znaków'}});
+          return 'Login musi posiadać min. 4 znaków'
         }
-    }
+        if(password.length === 0){
+          setErrors(previousState=>{return{...previousState, password: 'Hasło jest wymagane'}});
+         return 'Hasło jest wymagane'
+        }else if(password.length < 5 ){
+          setErrors(previousState=>{return{...previousState, password: 'Hasło musi posiadać min. 5 znaków'}});
+          return 'Hasło musi posiadać min. 5 znaków'
+        }
+        return null
+      }
  
     async function LogInUser(){
-        if(login.length == 0){
-            setErrors(prevState => {
-               return{
-                ...prevState, 
-                login:'za mało liter',
-               }})
-               return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 login:'',
-                }})
-        }
-        if(password.length < 5){
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 password:'Wymagane 4 znaki',
-                }})
-            return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 password:'',
-                }}) 
-        }
+        setErrors({login:'',password:''});
+
+        let errorMsg = validatorUser();
+        if(errorMsg){
+            if(errorMsg === 'Login jest wymagany'){
+              return
+            }else if(errorMsg = 'Login musi posiadać min. 4 znaków'){
+              return
+            }
+            if(errorMsg === 'Hasło jest wymagane'){
+              return
+            }else if(errorMsg === 'Hasło musi posiadać min. 5 znaków'){
+              return
+            }
+          }
+       
         try{
             const res =  await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDx7ElxnVGWEcB8q-AtMXmKbDbFLfd9tdI', {
             email: login,
@@ -71,15 +69,9 @@ const SignIn = () => {
               }
            }
 
-          setLogin('');
-            setPassword('');
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 login:'',
-                 password:''
-                }})
-            navigate('/');
+        setLogin('');
+        setPassword('');
+        navigate('/');
     }
 
     const backtoHome = () => {
@@ -104,7 +96,8 @@ const SignIn = () => {
             : <TextField  value={login} onChange={(e)=>setLogin(e.target.value)} variant="outlined" label="Login" color="warning" sx={{width:'300px', marginBottom:'10px'}}></TextField>}
             {errors.password ? <TextField type="password" error helperText={errors.password} value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
             : <TextField  type="password" value={password} onChange={(e)=>setPassword(e.target.value)} variant="outlined"  color="warning" label="Hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
-             {response  ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Nieprawidłowe dane logowania!</Typography></Alert> : null }
+             {response === 'INVALID_EMAIL' ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Nieprawidłowy E-mail</Typography></Alert> : null }
+             {response === 'INVALID_PASSWORD' ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Nieprawidłowe hasło</Typography></Alert> : null }
             <Button color="warning" variant="contained" disableElevation sx={{width: '250px', marginTop:'20px'}} onClick={LogInUser}>Zaloguj się</Button>
             <Typography sx={{marginTop: '10px'}}>Nie masz konta ?</Typography>
             <Button variant="outlined" color="error" sx={{marginTop: '10px'}} onClick={backtoRegister}>Załóż konto</Button>

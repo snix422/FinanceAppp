@@ -1,17 +1,18 @@
 import { Container, Typography } from "@mui/material"
 import { Doughnut } from "react-chartjs-2"
 import { useSelector } from "react-redux"
+import { RootState } from "../app/store";
  
 
 const ChartExpenditure = () => {
 
-    const zakupy = useSelector((state:any)=>state.influenceAndExpenditure.categoryZakupy);
-    const paliwo = useSelector((state:any)=>state.influenceAndExpenditure.categoryPaliwo);
-    const leki = useSelector((state:any)=>state.influenceAndExpenditure.categoryLeki);
-    const podroze = useSelector((state:any)=>state.influenceAndExpenditure.categoryPodroze);
-    const dzieci = useSelector((state:any)=>state.influenceAndExpenditure.categoryDzieci);
-    const rachunki = useSelector((state:any)=>state.influenceAndExpenditure.categoryRachunki);
-    const kredyt = useSelector((state:any)=>state.influenceAndExpenditure.categoryKredyt);
+    const shopping = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryZakupy);
+    const fuel = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryPaliwo);
+    const medicines = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryLeki);
+    const travel = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryPodroze);
+    const children = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryDzieci);
+    const bills = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryRachunki);
+    const credit = useSelector((state:RootState)=>state.influenceAndExpenditure.categoryKredyt);
 
     return(
     <Container sx={{ width:{
@@ -25,7 +26,7 @@ const ChartExpenditure = () => {
          <Doughnut data={{labels:['Zakupy','Paliwo','Leki','Podróże i relaks','Dzieci','Rachunki','Kredyt'],
             datasets:[{
                 label:'Rodzaje wydatków',
-                data: [zakupy,paliwo,leki,podroze,dzieci,rachunki,kredyt],
+                data: [shopping,fuel,medicines,travel,children,bills,credit],
                 backgroundColor:['green','red','lightblue','yellow','orange','black','grey']
             }],    
         }}

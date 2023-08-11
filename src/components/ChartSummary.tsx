@@ -7,7 +7,6 @@ import axios from "axios";
 
 const ChartSummary = (props:any) => {
 
-const Items = useSelector((state:any)=>state.influenceAndExpenditure.items);
 /*const expenditure = Items.filter((item:any)=>item.type === "expenditure");
 const zakupy = useSelector((state:any)=>state.influenceAndExpenditure.categoryZakupy);
 const paliwo = useSelector((state:any)=>state.influenceAndExpenditure.categoryPaliwo);

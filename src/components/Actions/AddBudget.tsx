@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { influenceAndExpenditureActions } from "../../app/store";
 
 
+
 const AddBudget = () => {
 
     const [month, setMonth] = useState('');
@@ -19,6 +20,7 @@ const AddBudget = () => {
     const currentDay = date.getDate();
     const currentMonthOnNumber = date.getMonth();
     const currentMonth = months[currentMonthOnNumber];
+   
 
     const handleChange = (event:any) => {
     setMonth(event.target.value);
@@ -30,7 +32,7 @@ const AddBudget = () => {
     if(month?.length == 0 || price === 0 || null){
         setError(true);
     }else{
-        dispatch(influenceAndExpenditureActions.addInfluence({price:price,monthBudget:month,day:currentDay,year:currentYear,month:currentMonth}))
+        dispatch(influenceAndExpenditureActions.addInfluence({id:Math.floor(Math.random()*10000),price:price,monthBudget:month,day:currentDay,year:currentYear,month:currentMonth}))
         setMonth('');
         setPrice(0)  
         setError(false);
@@ -75,7 +77,7 @@ const AddBudget = () => {
         <MenuItem value={'Maj'}>Maj</MenuItem>
         <MenuItem value={'Czerwiec'}>Czerwiec</MenuItem>
         <MenuItem value={'Lipiec'}>Lipiec</MenuItem>
-        <MenuItem value={'Sierpien'}>Sierpień</MenuItem>
+        <MenuItem value={'Sierpień'}>Sierpień</MenuItem>
         <MenuItem value={'Wrzesien'}>Wrzesień</MenuItem>
         <MenuItem value={'Pazdziernik'}>Październik</MenuItem>
         <MenuItem value={'Listopad'}>Listopad</MenuItem>

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import axios from "axios";
 
+
 const SignUp =  () => {
    
     const [name, setName] = useState('')
@@ -20,71 +21,60 @@ const SignUp =  () => {
     const [response, setResponse] = useState(null);
 
     const navigate = useNavigate();
+
+    const validatorUser = () => {
+        if(name.length === 0){
+          setErrors(previousState=>{return{...previousState, name:'Imię jest wymagane'}})
+          return 'Imię jest wymagane'
+        }else if(name.length < 4){
+          setErrors(previousState=>{return{...previousState,name: 'Imię musi posiadać min. 4 znaków'}});
+          return 'Imię musi posiadać min. 3 znaków'
+        }
+        if(login.length === 0){
+            setErrors(previousState=>{return{...previousState, login:'Login jest wymagany'}})
+            return 'Login jest wymagany'
+          }else if(login.length < 5){
+            setErrors(previousState=>{return{...previousState,login: 'Login musi posiadać min. 5 znaków'}});
+            return 'Login musi posiadać min. 5 znaków'
+          }
+        if(password.length === 0){
+          setErrors(previousState=>{return{...previousState, password: 'Hasło jest wymagane'}});
+         return 'Hasło jest wymagane'
+        }else if(password.length < 5 ){
+          setErrors(previousState=>{return{...previousState, password: 'Hasło musi posiadać min. 5 znaków'}});
+          return 'Hasło musi posiadać min. 5 znaków'
+        }
+        if(confirmPassword !== password){
+            setErrors(previousState=>{return{...previousState, checkPass:'Hasła nie są takie same'}});
+            return 'Hasła nie są takie same'
+        }
+        return null
+      }
   
     const RegisterUser = async () => {
-        
-        if(name.length == 0){
-            setErrors(prevState => {
-               return{
-                ...prevState, 
-                name:'Pole nie może być puste',
-               }})
-               return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 name:'',
-                }})
-                console.log('git', );
-        }
-        
-        
-        if(login.length == 0){
-            setErrors(prevState => {
-               return{
-                ...prevState, 
-                login:'za mało liter',
-               }})
-               return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 login:'',
-                }})
-        }
-        
-        if(password.length < 4){
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 password:'Wymagane 4 znaki',
-                }})
-            return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 password:'',
-                }})
-        }
 
-        if(password !== confirmPassword){
-            setErrors(prevState => {
-               return{
-                ...prevState, 
-                checkPass:'Hasła nie są takie same'
-               }})
-               return
-        }else{
-            setErrors(prevState => {
-                return{
-                 ...prevState, 
-                 checkPass:'',
-                }})
-                console.log('git', );
-        }
+        setErrors({name:'',login:'',password:'',checkPass:''});
+        let errorMsg = validatorUser();
+        if(errorMsg){
+            if(errorMsg === 'Imię jest wymagane'){
+                return
+            }else if(errorMsg === 'Imię musi posiadać min. 3 znaków'){
+                return
+            }
+            if(errorMsg === 'Login jest wymagany'){
+              return
+            }else if(errorMsg = 'Login musi posiadać min. 4 znaków'){
+              return
+            }
+            if(errorMsg === 'Hasło jest wymagane'){
+              return
+            }else if(errorMsg === 'Hasło musi posiadać min. 5 znaków'){
+              return
+            }
+            if(errorMsg === 'Hasła nie są takie same'){
+                return
+            }
+          }
 
         try{
             const res =  await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDx7ElxnVGWEcB8q-AtMXmKbDbFLfd9tdI', {
@@ -95,6 +85,7 @@ const SignUp =  () => {
            res.data.displayName=name;
             }catch(ex:any){
             setResponse(ex.response.data.error.message);
+            return
             if(response !== null){
                 setLogin('');
                 setPassword('');
@@ -111,13 +102,8 @@ const SignUp =  () => {
         
         setLogin('');
         setPassword('');
-        setErrors(prevState => {
-            return{
-             ...prevState, 
-             login:'',
-             password:''
-            }})
-           
+        setName('');
+        setConfirmPassword('')  
         navigate('/');
     }
 
@@ -157,7 +143,8 @@ const SignUp =  () => {
              {errors.checkPass ? <TextField type="password" error helperText={errors.checkPass} value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning"   sx={{width:'300px', marginBottom:'30px'}}></TextField> 
             : <TextField type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} variant="outlined"  color="warning" label="Potwierdź hasło" sx={{width:'300px', marginBottom:'30px'}}></TextField>}
              
-             {response  ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Ten mail jest już używany!</Typography></Alert> : null }
+             {response === 'INVALID_EMAIL'  ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Email nieprawidłowy!!!</Typography></Alert> : null }
+             {response === 'EMAIL_EXISTS'  ? <Alert severity="error"><Typography sx={{fontFamily:'Montserrat', fontSize:'15px', fontWeight:'bold'}}>Ten mail jest już używany!!!</Typography></Alert> : null }
             <Button color="warning" variant="contained" disableElevation sx={{width: '250px', marginTop:'20px'}} onClick={RegisterUser}>Zarejestruj się</Button>
             <Typography sx={{marginTop: '10px'}}>Masz konto ?</Typography>
             <Button variant="outlined" color="success" sx={{marginTop: '10px'}} onClick={backToLogin}>Zaloguj się</Button>

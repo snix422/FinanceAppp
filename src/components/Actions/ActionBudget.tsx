@@ -1,6 +1,6 @@
 import { Container } from "@mui/material"
 import AddBudget from "./AddBudget"
-import IncreaseBudget from "./IncreaseBudget"
+import IncreaseBudget from "./DecreaseBudget"
 
 const ActionBudget = () => {
     return(

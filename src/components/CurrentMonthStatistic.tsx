@@ -4,10 +4,11 @@ import { useSelector } from "react-redux";
 import ChartSummary from "./ChartSummary";
 import ChartExpenditure from "./ChartExpenditure";
 import axios from "axios";
+import { RootState } from "../app/store";
 
 const CurrentMonthStatistic = () => {
-    const budget = useSelector((state:any)=>state.influenceAndExpenditure.monthBudget);
-    const expenditure = useSelector((state:any)=>state.influenceAndExpenditure.monthExpenditure);
+    const budget = useSelector((state:RootState)=>state.influenceAndExpenditure.monthBudget);
+    const expenditure = useSelector((state:RootState)=>state.influenceAndExpenditure.monthExpenditure);
     const [savings, setSavings] = useState(0);
     const [expenditureMonth, setExpenditureMonth] = useState([]);
 

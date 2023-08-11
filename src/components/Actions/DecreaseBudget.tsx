@@ -3,8 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { influenceAndExpenditureActions } from "../../app/store";
 
-const IncreaseBudget = () => {
-
+const DecreaseBudget = () => {
 
     const [category, setCategory] = useState<string|null>(null);
     const [price, setPrice] = useState<number|null>(0);
@@ -30,7 +29,7 @@ const IncreaseBudget = () => {
         if(category?.length == 0 || price === 0 || null){
             setError(true);
         }else{
-            dispatch(influenceAndExpenditureActions.addExpenditure({price:price,category:category,year:currentYear,month:currentMonth,day:currentDay}))
+            dispatch(influenceAndExpenditureActions.addExpenditure({id:Math.floor(Math.random()*10000),price:price,category:category,year:currentYear,month:currentMonth,day:currentDay}))
             setCategory(null);
             setPrice(0)  
             setError(false);
@@ -84,4 +83,4 @@ const IncreaseBudget = () => {
     )
 }
 
-export default IncreaseBudget
+export default DecreaseBudget
